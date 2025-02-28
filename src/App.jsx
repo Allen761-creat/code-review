@@ -18,7 +18,7 @@ const App = () => {
   const review = async () => {
     try {
       setOutput("")
-      const { data } = await axios.post("http://localhost:1111/ai/getreview", { code });
+      const { data } = await axios.post("https://bc-code-review-hder.vercel.app/ai/getreview", { code });
     setOutput(data);
     } catch (error) {
       console.error("Error fetching review:", error);
