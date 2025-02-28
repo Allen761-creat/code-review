@@ -17,11 +17,13 @@ const App = () => {
 
   const review = async () => {
     try {
+      setOutput("")
       const { data } = await axios.post("http://localhost:1111/ai/getreview", { code });
-      setOutput(data.review || data);
+    setOutput(data);
     } catch (error) {
       console.error("Error fetching review:", error);
     }
+   
   };
 
   return (
@@ -63,11 +65,12 @@ const App = () => {
           borderRadius: "10px", border: "2px solid white",
           scrollbarWidth: "none",
           msOverflowStyle: "none"
-        }} className="lg:h-[94%] lg:w-[48%] xs:gap-1 xs:w-[97%] xs:h-[47%] xs:p-1 text-[20px] overflow-auto scrollbar-hidden bg-gray-900 p-5 text-white">
+        }} className="lg:h-[94%] lg:w-[48%] xs:gap-1 xs:w-[97%] xs:h-[47%] xs:p-1 text-[17px]  overflow-auto scrollbar-hidden bg-gray-900 p-5 text-white">
 
           {
             output ? (
-              <Markdown rehypePlugins={[rehypeHighlight]}
+              <div className="p-3">
+              <Markdown  rehypePlugins={[rehypeHighlight]}
 
                 components={{
                   h1: ({ children }) => <h1 className="text-red-400 text-3xl font-bold">{children}</h1>,
@@ -83,6 +86,7 @@ const App = () => {
               >
                 {output}
               </Markdown>
+              </div>
 
             ) : <div className="relative flex justify-center top-28 items-center">
               <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500" />
